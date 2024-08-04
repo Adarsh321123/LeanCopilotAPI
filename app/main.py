@@ -23,6 +23,13 @@ class ModelInfo(BaseModel):
     emb_url: str
     last_modified: str
 
+unique_urls = set()
+# TODO: remove after testing
+url1 = "https://github.com/leanprover-community/mathlib4.git"
+url2 = "https://github.com/teorth/pfr.git"
+unique_urls.add(url1)
+unique_urls.add(url2)
+
 @app.post("/train/")
 async def add_model_to_train(request: Request):
     print(f"Adding model to train: {request.url}")
@@ -160,10 +167,4 @@ def main():
 
 if __name__ == "__main__":
     # main()
-    unique_urls = set()
-    # TODO: remove after testing
-    url1 = "https://github.com/leanprover-community/mathlib4.git"
-    url2 = "https://github.com/teorth/pfr.git"
-    unique_urls.add(url1)
-    unique_urls.add(url2)
     uvicorn.run(app, host="127.0.0.1", port=8000)
